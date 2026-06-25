@@ -42,12 +42,13 @@ public class FeedController extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			for (PostDTO post : olderPosts) {
 				out.println("<div class=\"post-item\" data-id=\"" + post.id() + "\">");
-				out.println("<p><strong>" + post.username() + "</strong> - " + post.createdAt() + "</p>");
-				out.println("<p>" + post.text() + "</p>");
+				out.println("  <div class=\"post-meta\">");
+				out.println("    <strong>" + post.username() + "</strong> &bull; " + post.createdAt());
+				out.println("  </div>");
+				out.println("  <div class=\"post-text\">" + post.text() + "</div>");
 				if (post.imagePath() != null) {
-					out.println("<img src=\"" + request.getContextPath() + "/uploads/" + post.imagePath() + "\" style=\"max-width:300px; display:block;\">");
+					out.println("  <img src=\"" + request.getContextPath() + "/uploads/" + post.imagePath() + "\" class=\"post-image\" alt=\"Imagem do post\">");
 				}
-				out.println("<hr>");
 				out.println("</div>");
 			}
 			return;
